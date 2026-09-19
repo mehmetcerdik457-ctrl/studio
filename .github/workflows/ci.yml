@@ -10,25 +10,4 @@ permissions:
 
 jobs:
   baseline:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-
-      - name: Set up Python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
-        with:
-          python-version: '3.x'
-
-      - name: Repository sanity
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -V
-          git diff --check
-          if find . -type f -name '*.py' -not -path './.git/*' -print -quit | grep -q .; then
-            python -m compileall -q .
-          fi
+    uses: mehmetcerdik457-ctrl/.github/.github/workflows/reusable-python-baseline.yml@fea0cdba87dd09c88648eb29302e65c32ba7fd44
